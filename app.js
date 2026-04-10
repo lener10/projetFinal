@@ -5,7 +5,7 @@ const connectDb = require("./config/db");
 const app = express();
 app.use(express.json());
 
-// Connexion MongoDB (sans options obsolètes)
+// Connexion MongoDB 
 connectDb();
 
 // Routes
@@ -18,5 +18,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/credits', creditRoutes);
 app.use('/api/payments', paymentRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: err.message });
+});
 
 app.listen(process.env.PORT, () => console.log(`Serveur demarre sur port ${process.env.PORT}`));

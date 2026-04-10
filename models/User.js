@@ -7,11 +7,10 @@ const userSchema = new mongoose.Schema({
   motDePasse: { type: String, required: true }
 });
 
-// Avant sauvegarde : hash du mot de passe
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('motDePasse')) return next();
+// Hash du mot de passe avant sauvegarde
+userSchema.pre('save', async function() {
+  if (!this.isModified('motDePasse')) return ;
   this.motDePasse = await bcrypt.hash(this.motDePasse, 10);
-  next();
 });
 
 // Méthode pour comparer mot de passe
