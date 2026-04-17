@@ -77,7 +77,7 @@ Inscription
 POST /api/users/register
 {
   "name": "Admin",
-  "email": "admin@mail.com",
+  "email": "admin@gmail.com",
   "password": "123456"
 }
 
